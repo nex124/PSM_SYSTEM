@@ -2,7 +2,8 @@
 
 @section('form')
 <center>
-<h1>FYP CARNIAL MARKS</h1>
+<h1 class="display-3">FYP CARNIAL MARKS</h1>
+<br><br>
 
 <form action="/assign_industry/add" method="post">
 
@@ -25,13 +26,20 @@
     <div class="col-sm-10">
     <input type="text"  name="studentTitle" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter FYP title">
    </div>
-    <br><br><br><br>
+    <br><br>
   </div>
   <div class="col-7">
     <label for="exampleFormControlTextarea1">ASSIGN INDUSTRY NAME</label>
     <textarea class="form-control" name="indusName" id="exampleFormControlTextarea1" rows="1" placeholder="Enter Industry Name"></textarea>
   </div> 
-  <div class="col-7">
+  <br>
+  </div>
+  <div class="col-3">
+    <label for="exampleFormControlTextarea1">INDUSTRY TYPE</label>
+    <textarea class="form-control" name="indusType" id="exampleFormControlTextarea1" rows="1" placeholder="Enter Industry Type"></textarea>
+  </div> 
+  <br>
+  <div class="col-8">
     <label for="exampleFormControlTextarea1">JUSTIFICATION</label>
     <textarea class="form-control" name="reason" id="exampleFormControlTextarea1" rows="4"></textarea>
   </div>

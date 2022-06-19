@@ -2,7 +2,8 @@
 
 @section('table')
 <center>
-<h1>FYP CARNIAL MARKS</h1>
+<h1 class="display-3">FYP CARNIAL MARKS</h1>
+<br><br>
 
 <center>
 <table class="table table-dark" style="width:75%">
@@ -13,7 +14,8 @@
       <th scope="col">MATRIX ID</th>
       <th scope="col">SUPERVISOR</th>
       <th scope="col">FINAL YEAR PROJECT TITLE</th>
-      <th scope="col">PSM 1 MARKS</th>
+      <th scope="col">PSM 1 TOTAL</th>
+      <th scope="col">PSM 2 TOTAL</th>
       <th scope="col">TOTAL MARKS</th>
       <th scope="col">ASSIGN INDUSTRY</th>
     </tr>
@@ -28,6 +30,7 @@
       <td>{{$data->studentTitle}}</td>
       <td>{{$data->psm1Marks}}</td>
       <td>{{$data->psm2Marks}}</td>
+      <td>{{$data->psmFinalResult}}</td>
       <td><a href="/assign_industry" class='btn btn-primary'>Assign</a></td>
     </tr>
    @endforeach 

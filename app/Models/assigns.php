@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class assigns extends Model
 {
     use HasFactory;
-    protected $fillable = ['studentID','studentName','studentTitle','indusName','reason'];
+    protected $fillable = ['studentID','studentName','studentTitle','indusName','indusType','reason'];
     public $timestamps = false;
 }

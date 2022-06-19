@@ -39,12 +39,13 @@ Route::get('/masterC', function () {
     return view('masterC');
 });
 
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('home');
 });
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
@@ -99,9 +100,13 @@ Route::get('/assign_industry', function () {
 });
  
 
-Route::get('/studentresult','App\Http\Controllers\Top20@show');
-Route::post('/assign_industry/add','App\Http\Controllers\Top20@add');
-Route::get('/studentresult/top20','App\Http\Controllers\Top20@order');
+Route::get('/home2', function () {
+    return view('mainpage.homepage');
+});
+
+Route::get('/studentresult','App\Http\Controllers\Top20@show');//display all result
+Route::post('/assign_industry/add','App\Http\Controllers\Top20@add');//add info into table from form
+Route::get('/studentresult/top20','App\Http\Controllers\Top20@order');// generate list of top 20 based on finalresult
 
 //Generate Report
 Route::get('/reportMainC', function () {

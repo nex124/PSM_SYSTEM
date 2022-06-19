@@ -9,26 +9,25 @@ use Illuminate\Support\Facades\DB;
 class Top20 extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display the generated Top 20 results
      *
      * @return \Illuminate\Http\Response
      */
     public function order()
     {
-        $id = studentresult::select('studentName','studentID','SvName','studentTitle','psm1Marks','psm2Marks')
-                            ->orderBy('psm2Marks', 'DESC')
+        $id = studentresult::select('studentName','studentID','SvName','studentTitle','psm1Marks','psm2Marks','psmFinalResult')
+                            ->orderBy('psmFinalResult', 'DESC')
+                            ->take(20)
                             ->get();
         return view('Top_20_students.Resultmain',['id'=> $id])->with('success','Generated Top 20 students');        
 
-        //$id = \App\Models\studentresult::all();
-        //return view('Top_20_students.Resultmain',['id'=> $id]);
-        
+ 
     }
 
 
 
     /**
-     * Display the specified resource.
+     * Display all the results with no orderly manner
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -36,11 +35,11 @@ class Top20 extends Controller
     public function show()
     {
         $id = \App\Models\studentresult::all();
-        return view('Top_20_students.Resultmain',['id'=> $id]);
+        return view('Top_20_students.Resultmain',['id'=> $id]);//returning back to Reusltmain page
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Form to add new info into the table
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -49,7 +48,7 @@ class Top20 extends Controller
     {
 
          \App\Models\assigns::create($request->all());
-         return redirect('/studentresult');
+         return redirect('/studentresult');//return to student result if successful
     }    
 
 

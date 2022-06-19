@@ -11,6 +11,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <style>
+
 body{
 margin:0;
 padding:0;
@@ -236,7 +237,7 @@ font-size: 18px;
     <input type="checkbox" id="check">
 <header>
   <label for ="check">
-    <i class="fas fa-bars" id="sidebar_btn"></i>
+    <i class="fas fa-bars" id="sidebar_btn"  aria-hidden="true"></i>
   </label>
   <!--left-->
   <div class="left">
@@ -251,6 +252,7 @@ font-size: 18px;
         <a class="button" href="/studentresult">Generate Top 20</a>
         <a class="button" href="/searchstudentlist">Student's Profile</a>
     </div>
+
 </header>
 
 <div class="sidebar">
@@ -277,7 +279,7 @@ function checklogout(){
 <br><br><br>
 <img src = " {{ URL('/umplogo.png') }} " alt="ump" width="200" height="100">
 <br><br><br>
-
+@yield('main')
 @yield('table')
 @yield('form')
 @yield('content')
