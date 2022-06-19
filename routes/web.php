@@ -6,11 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\reportController;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Deadline;
-use App\Http\Controllers\usercontroller;
-use App\Http\Controllers\supervisorcontroller;
-use App\Http\Controllers\studentcontroller;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Top20;
+use App\Http\Controllers\CarnivalController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,7 +52,26 @@ Route::get('/logout', [usercontroller::class, 'destroy'])
                 ->name('logout');
 
 //Manage Evaluation
-Route::get('/svMenu', [EvaluationController::class, 'svMenu']);
+Route::get('/svMenu', function () {
+
+    $deadlinePsm1 = Deadline::select(['deadlines.*'])
+        ->where('psmType', '=', 'PSM 1')
+        ->latest('created_at')->first();
+
+    $deadlinePsm2 = Deadline::select(['deadlines.*'])
+        ->where('psmType', '=', 'PSM 2')
+        ->latest('created_at')->first();
+
+    $deadlinePta = Deadline::select(['deadlines.*'])
+        ->where('psmType', '=', 'PTA')
+        ->latest('created_at')->first();
+
+    return view('/evaluation/svMenu', [
+        'deadlinePsm1' => $deadlinePsm1,
+        'deadlinePsm2' => $deadlinePsm2,
+        'deadlinePta' => $deadlinePta,
+    ]);
+});
 
 Route::get('/svView', [EvaluationController::class, 'svView']);
 Route::get('/deadline', [EvaluationController::class, 'deadline']);
@@ -114,13 +130,14 @@ Route::get('/reportS', function () {
 Route::get('/reportStu', function () {
     return view('/report/reportStu');
 });
-Route::get('/studentListS', [reportController::class,'viewListS']);
-Route::get('/studentListC', [reportController::class,'viewListC']);
-Route::get('/reportS/{resultID}/{psmType}', [reportController::class,'viewdataS']);
-Route::get('/reportC/{resultID}/{psmType}', [reportController::class,'viewdataC']);
-Route::get('/reportOverview', [reportController::class,'calctotal']);
 
-require __DIR__.'/auth.php';
+Route::get('/studentListS', [reportController::class, 'viewList1']);
+Route::get('/studentListC', [reportController::class, 'viewList2']);
+Route::get('/reportStu/{resultID}/{psmType}', [reportController::class, 'viewdata']);
+
+Route::get('/reportOverview', [reportController::class, 'calctotal']);
+
+require __DIR__ . '/auth.php';
 
 //Manage Student
 Route::get('/searcsupervisor', function () {
@@ -166,29 +183,26 @@ Route::get('/searchsvlist/{supervisorID}', 'App\Http\Controllers\usercontroller@
 Route::get('/smainpage', function () {
 
     $deadlinePsm1 = Deadline::select(['deadlines.*'])
-                            ->where('psmType', '=', 'PSM 1')
-                            ->latest('created_at')->first();
+        ->where('psmType', '=', 'PSM 1')
+        ->latest('created_at')->first();
 
     $deadlinePsm2 = Deadline::select(['deadlines.*'])
-                            ->where('psmType', '=', 'PSM 2')
-                            ->latest('created_at')->first();
+        ->where('psmType', '=', 'PSM 2')
+        ->latest('created_at')->first();
 
     $deadlinePta = Deadline::select(['deadlines.*'])
-                            ->where('psmType', '=', 'PTA')
-                            ->latest('created_at')->first();
+        ->where('psmType', '=', 'PTA')
+        ->latest('created_at')->first();
 
     return view('/supervisor/smainpage', [
         'deadlinePsm1' => $deadlinePsm1,
         'deadlinePsm2' => $deadlinePsm2,
         'deadlinePta' => $deadlinePta,
     ]);
-
 });
 
-Route::get('/searchstudentlist', 'App\Http\Controllers\supervisorcontroller@studentlist');
-Route::get('/searchstudentlist/search', 'App\Http\Controllers\supervisorcontroller@studentprofile');
-Route::get('/viewstudentprofile/{studentID}', 'App\Http\Controllers\supervisorcontroller@viewprofile');
-Route::get('/svmyprofile', function () {
-    return view('/supervisor/svmyprofile');
-});
-Route::get('/svmyprofile', 'App\Http\Controllers\supervisorcontroller@svmyprofile');
+Route::get('/carnival_evaluation', [CarnivalController::class, 'index'])->name('CarnivalEvaluation');
+Route::post('/carnival_evaluation/create', [CarnivalController::class, 'store'])->name('CarnivalEvaluation.store');
+Route::get('/carnival_evaluation/create', [CarnivalController::class, 'create'])->name('CarnivalEvaluation.create');
+Route::get('/carnival_evaluation/edit/{carnival_evaluation}', [CarnivalController::class, 'edit'])->name('CarnivalEvaluation.edit');
+Route::put('/carnival_evaluation/edit/{carnival_evaluation}', [CarnivalController::class, 'update'])->name('CarnivalEvaluation.update');
