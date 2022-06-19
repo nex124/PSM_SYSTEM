@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\supervisor;
+use App\Http\Controllers\studentcontroller;
+use Image;
 
 class studentcontroller extends Controller
 {
@@ -33,4 +35,11 @@ class studentcontroller extends Controller
         $result = supervisor::select('*')->where('supervisorID', '=', $supervisorID)->get();
         return view('\Student\svprofile', ['result' => $result]);
     }
-}
+
+    function mylist()
+    {
+        $deta = Student::select('*')->where('studentName','=',auth()->user()->name)->first();
+        return view('\Student\myprofile',['deta'=>$deta]);
+    }
+    
+    }

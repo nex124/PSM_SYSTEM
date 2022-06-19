@@ -2,7 +2,8 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+            <br><br><br>
+                <img src = " {{ URL('umplogo.png') }} " alt="ump" width="200" height="100">
             </a>
         </x-slot>
 
@@ -17,6 +18,15 @@
                 <x-label for="name" :value="__('Name')" />
 
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+            </div>
+
+            <!-- Phone Number -->
+            <div class="mt-4">
+            <x-label for="phonenun" :value="__('Phone Number')" />
+
+            <x-input id="phonenum" class="block mt-1 w-full" type="text" name="phonenum" :value="old('phonenum')" required autofocus />
+
+
             </div>
 
             <!-- Email Address -->

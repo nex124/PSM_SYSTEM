@@ -7,10 +7,12 @@
 
 table{
 border:no border;
-text-align:center;
-font-size:18px;
-margin-left:200px;
+text-align:left;
+font-size:15px;
+margin-left:160px;
+margin-right:150px;
 }
+
 .round {
   border-radius: 50%;
 }
@@ -32,6 +34,12 @@ margin-left:200px;
   color: white;
 }
 
+.vl {
+  border-left: 6px solid black;
+  height: 600px;
+  width:20%
+}
+
 </style>
 @if(session()->has('successMsg'))
     <div class="alert alert-success">
@@ -39,66 +47,63 @@ margin-left:200px;
     </div>
 @endif
 <h3 style="color:orange;font-size:39px;text-align:center;margin-top:-6%;">Student's Profile</h3>
-<br><br><br><br><br><br>
+<br><br><br>
 @foreach($result as $detaa)
-<form action="/searchstudent" method='get'>
+<form action="/searchstudent" method='get' enctype="multipart/form-data">
     @csrf
-<table>
+    <table>
     <tr>
-        <th><img src="" style="height=150";width="150";></th>
+    <td rowspan="11"><img src="{{$detaa->image}}" style="width:250px;height:250px; float:left;border-radius:50%;margin-right:25px;" name="image"></td>
 </tr>
 <tr>
-<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Name:</th>
-<th>&emsp;&emsp;{{ $detaa->studentName }}<br><br></th>
+    <td rowspan="11"><div class="vl"></div></td>
 </tr>
 <tr>
-<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Matric ID:</th>
-<th>&emsp;&emsp;{{$detaa->studentID}}<br><br></th>
+<th style="width:50%">&emsp;&emsp;&emsp;Name:</th>
+<th style="width:50%"><br>&emsp;&emsp;<input style = "border:2px solid orange;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{$detaa->studentName}}" required><br><br></th>
 </tr>
 <tr>
-<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Address:</th>
-<th>&emsp;&emsp;{{$detaa->stdaddress}}<br><br></th>
+<th style="width:50%">&emsp;&emsp;&emsp;Matric ID:</th>
+<th><br>&emsp;&emsp;<input style = "border:2px solid orange;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{$detaa->studentID}}" required><br><br></th>
 </tr>
 <tr>
-<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Phone Number:</th>
-<th>&emsp;&emsp;{{$detaa->studentPhone}}<br><br></th>
+<th style="width:50%">&emsp;&emsp;&emsp;Address:</th>
+<th><br>&emsp;&emsp;<input style = "border:2px solid orange;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{$detaa->stdaddress}}" required><br><br></th>
 </tr>
 <tr>
-<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Email:</th>
-<th>&emsp;&emsp;{{$detaa->stdemail}}<br><br></th>
+<th style="width:50%">&emsp;&emsp;&emsp;Phone Number:</th>
+<th><br>&emsp;&emsp;<input style = "border:2px solid orange;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{$detaa->studentPhone}}" required><br><br></th>
+</tr>
+<tr>
+<th style="width:50%">&emsp;&emsp;&emsp;Email:</th>
+<th><br>&emsp;&emsp;<input style = "border:2px solid orange;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{$detaa->stdemail}}" required><br><br></th>
 </tr>
 
 <tr>
-<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Year:<br><br></th>
-<th>&emsp;&emsp;{{$detaa->stdyear}}</th>
+<th style="width:50%">&emsp;&emsp;&emsp;Year:<br><br></th>
+<th><br>&emsp;&emsp;<input style = "border:2px solid orange;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{$detaa->stdyear}}" required><br><br></th>
 </tr>
 <tr>
-<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Supervisor:</th>
-<th>&emsp;&emsp;{{$detaa->stdsupervisor}}<br><br></th>
+<th style="width:50%">&emsp;&emsp;&emsp;Supervisor:</th>
+<th><br>&emsp;&emsp;<input style = "border:2px solid orange;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{$detaa->stdsupervisor}}" required><br><br></th>
 </tr>
 <tr>
-<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;PSM title:</th>
-<th>&emsp;&emsp;{{$detaa->stdpsmtitle}}<br><br></th>
+<th style="width:50%">&emsp;&emsp;&emsp;PSM title:</th>
+<th><br>&emsp;&emsp;<input style = "border:2px solid orange;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{$detaa->stdpsmtitle}}" required><br><br></th>
 </tr>
 <tr>
-<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;PSM Type:<br><br></th>
-<th>&emsp;&emsp;{{$detaa->psmType}}</th>
+<th style="width:50%">&emsp;&emsp;&emsp;PSM Type:<br><br></th>
+<th><br>&emsp;&emsp;<input style = "border:2px solid orange;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{$detaa->psmType}}" required><br><br></th>
 </tr>
 <tr>
-<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Password:</th>
-<th>&emsp;&emsp;{{$detaa->password}}<br><br></th>
-</tr>
-<tr>
-<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Role Type:<br><br></th>
-<th>&emsp;&emsp;{{$detaa->roletype}}</th>
-</tr>
+
+</table>
 @endforeach
 
 
 </table>
 <br><br>
-<button onclick="location.href='{{ url('/updatestudent') }}'" class="b b1" value="Edit" style="width:80px;height: 40px;margin-left:800px;">EDIT</button>
-<button onclick="location.href='{{ url('/searchstudent') }}'"  class="b b1" value="Back" style="width:80px;height: 40px;margin-right:1%;">BACK</button>
+<button onclick="location.href='{{ url('/searchstudent') }}'"  class="b b1" value="Back" style="width:80px;height:30px;margin-left:80%;">BACK</button>
 <br><br>
 </form>
 </html>

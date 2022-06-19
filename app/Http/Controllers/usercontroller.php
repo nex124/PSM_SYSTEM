@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\supervisor;
 use App\Models\User;
-
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Image;
 
 class usercontroller extends Controller
 {
@@ -23,29 +26,12 @@ class usercontroller extends Controller
         return view ('\Coordinator\searchstudent', ['deta' => $deta])->with('FailedMsg','No Details found. Try to search again !' );		
         
     }
-public function home(request $req)
-    {
-        $deta = $req->input('detaa'); 
-        if ($req->role_type == "student") {
-            $deta = DB::table('student')->select('studentName','studentPhone','stdemail')->where('stdemail','=',$req->$email)->where('password','=',$req->$password)->get();
-            return view('/masterStu', ['detaa' => $deta]);
-        }
-        else if ($req->role_type == "supervisor"){
-            $deta = DB::table('supervisor')->select('svname','svphonenum','svemail')->where('svemail','=',$req->$email)->where('svpassword','=',$req->$password)->get();
-            return view('/masterS',['detaa' => $deta]);
-        }
-        if ($req->role_type == "coordiantor"){
-            $deta = DB::table('coordinator')->select('coordinatorname','coordinatorphonenum','coordinatoremail')->where('coordinatoremail','=',$req->$email)->where('cpassword','=',$req->$password)->get();
-            return view('/masterC',['detaa' => $deta]);
-        }
-        
-    }
 
 
     //Manage Coordinator
     function createstudent(Request $req)
     {
-        $var = new student;
+       /* $var = new student;
         $var->studentName=$req->name;
         $var->studentID=$req->id;
         $var->stdaddress=$req->address;
@@ -54,11 +40,30 @@ public function home(request $req)
         $var->stdyear=$req->year;
         $var->stdsupervisor=$req->supervisor;
         $var->stdpsmtitle=$req->psmtitle;
-        $var->psmType=$req->psmtype;
-        $var->password=$req->spassword;
-        $var->roletype=$req->role;
-        $var->save();
-        return redirect('searchstudent')->with('successMsg','Profile Successful created !');
+        $var->psmType=$req->psmtype;*/
+        if (request()->has('image')){
+            $imageuploaded = request()->file('image');
+            $imagename = time() . '.' . $imageuploaded->getClientOriginalExtension();
+            $imagepath = public_path('/uploads/student/');
+            $imageuploaded->move($imagepath,$imagename);
+            //Image::make($image)->resize(300,300)->save(public_path('/uploads/student/'.$filename));
+            $var = new student;
+            $var->studentName=$req->name;
+            $var->studentID=$req->id;
+            $var->stdaddress=$req->address;
+            $var->studentPhone=$req->phonenum;
+            $var->stdemail=$req->email;
+            $var->stdyear=$req->year;
+            $var->stdsupervisor=$req->supervisor;
+            $var->stdpsmtitle=$req->psmtitle;
+            $var->psmType=$req->psmtype;
+            $var->image = '/uploads/student/' . $imagename;
+            $var->save();
+            return redirect('searchstudent')->with('successMsg','Profile Successful created !');
+    
+        }
+        //$var->save();
+        //return redirect('searchstudent')->with('successMsg','Profile Successful created !');
 
     }
 
@@ -83,6 +88,7 @@ public function home(request $req)
     public function viewstudentprofile($studentID)
     {
         $result = Student::select('*')->where('studentID', '=', $studentID)->get();
+        
         return view('\Coordinator\viewstudent', ['result' => $result]);
     }
 
@@ -94,14 +100,15 @@ public function home(request $req)
 
     public function updatestudentprofile($studentID)
     {
-        $result = Student::select('*')->where('studentID', '=', $studentID)->get();
+        $result = Student::select('*')->where('studentID', '=', $studentID)->first();
         return view('\Coordinator\updatestudent', ['result' => $result]);
     }
 
     public function updatestdprofile(request $request,$studentID)
     {
 
-        $result=Student::find($studentID);
+        $result=Student::findOrFail($studentID)->first()->fill($request->all())->save();
+        /*$result=Student::find($request->$studentID);
         $result->studentName=$request->input('studentName');
         $result->stdaddress=$request->input('stdaddress');
         $result->studenPhone=$request->input('studentPhone');
@@ -109,9 +116,7 @@ public function home(request $req)
         $result->stdyear=$request->input('stdyear');
         $result->stdsupervisor=$request->input('stdsupervisor');
         $result->stdpsmtitle=$request->input('stdpsmtitle');
-        $result->psmType=$request->input('psmType');
-        $result->password=$request->input('password');
-        $result->update();
+        $result->update();*/
         return view('\Coordinator\viewstudent', ['result' => $result])->with('successMsg','Results Found !');
     }
 
@@ -142,8 +147,6 @@ public function home(request $req)
         $var->svphonenum=$req->phonenum;
         $var->svemail=$req->email;
         $var->svexpertise=$req->expertise;
-        $var->svpassword=$req->password;
-        $var->role_type=$req->role;
         $var->save();
         return redirect('searchsvlist')->with('successMsg','Profile Successful created !');
 
@@ -181,6 +184,17 @@ public function home(request $req)
     {
         $result = supervisor::select('*')->where('supervisorID', '=', $supervisorID)->delete();
         return redirect('searchsvlist')->with('successMsg','Profile Successful deleted !');
+    }
+
+    function destroy(Request $request)
+    {
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 
 }

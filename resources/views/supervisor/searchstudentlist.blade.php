@@ -88,7 +88,7 @@ table th,td{
     <td>{{$detaa->stdemail}}</td>
     <td >{{$detaa->stdsupervisor}}</td>
     <td >{{$detaa->stdpsmtitle}}</td>
-    <td><a href="/svprofile/{{ $detaa->supervisorID }}"><button type="button" style="background-color: white; border: 1px solid white;" > <i class="fas fa-eye"></i> </button></a></td>
+    <td><a href="/viewstudentprofile/{{ $detaa->studentID }}"><button type="button" style="background-color: white; border: 1px solid white;" > <i class="fas fa-eye"></i> </button></a></td>
     </tr>
   @endforeach
 </tbody>

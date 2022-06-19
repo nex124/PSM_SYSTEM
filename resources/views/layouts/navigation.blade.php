@@ -6,7 +6,9 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
+                    <br><br><br>
+                <img src = " {{ URL('umplogo.png') }} " alt="ump" width="200" height="100">
+
                     </a>
                 </div>
 

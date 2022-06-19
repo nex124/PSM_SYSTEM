@@ -14,10 +14,12 @@ use Illuminate\Support\Facades\Mail;
 
 class EvaluationController extends Controller
 {
+    //display deadine
     public function deadline() {
         return view('evaluation.deadline');
     }
 
+    //store deadline into database
     public function storeDeadline() {
 
         $deadline = new Deadline();
@@ -37,6 +39,28 @@ class EvaluationController extends Controller
         return redirect('/deadline')->with('success', 'Deadline has been saved successfully.');
     }
 
+    //evaluation menu
+    public function svMenu() {
+        $deadlinePsm1 = Deadline::select(['deadlines.*'])
+                            ->where('psmType', '=', 'PSM 1')
+                            ->latest('created_at')->first();
+
+        $deadlinePsm2 = Deadline::select(['deadlines.*'])
+                            ->where('psmType', '=', 'PSM 2')
+                            ->latest('created_at')->first();
+
+        $deadlinePta = Deadline::select(['deadlines.*'])
+                            ->where('psmType', '=', 'PTA')
+                            ->latest('created_at')->first();
+
+        return view('/evaluation/svMenu', [
+            'deadlinePsm1' => $deadlinePsm1,
+            'deadlinePsm2' => $deadlinePsm2,
+            'deadlinePta' => $deadlinePta,
+        ]);
+    }
+    
+    //student evaluation list for supervisor
     public function svView(Request $request) {
 
         $deadlinePsm1 = Deadline::select(['deadlines.*'])
@@ -101,6 +125,7 @@ class EvaluationController extends Controller
         ]);
     }
 
+    //evaluation form of a student
     public function svEdit($resultID, $psmType){
         if($psmType == 'psm1'){
             $result = psm1result::join('students', 'students.studentID', '=', 'psm1result.studentID')
@@ -125,6 +150,7 @@ class EvaluationController extends Controller
         }
     }
 
+    //update evaluation marks into database
     public function updateSvMarks(Request $request, $resultID, $psmType) {
 
         if($psmType == 'psm1'){
@@ -209,6 +235,7 @@ class EvaluationController extends Controller
         }
     }
 
+    //student evaluation list for evaluator
     public function evView(Request $request) {
 
         $deadlinePsm1 = Deadline::select(['deadlines.*'])
@@ -272,6 +299,7 @@ class EvaluationController extends Controller
         ]);
     }
 
+    //evaluation form of a student
     public function evEdit($resultID, $psmType){
         if($psmType == 'psm1'){
             $result = psm1result::join('students', 'students.studentID', '=', 'psm1result.studentID')
@@ -296,6 +324,7 @@ class EvaluationController extends Controller
         }
     }
 
+    //update evaluation marks into database
     public function updateEvMarks(Request $request, $resultID, $psmType) {
 
         if($psmType == 'psm1'){

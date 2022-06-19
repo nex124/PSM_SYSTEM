@@ -242,7 +242,6 @@ font-size: 18px;
 </div>
     <!--right-->
     <div class="topnav">
-        <a class="button" href="/">Logout</a>
         <a class="button" href="/reportMainC">Generate Report</a>
         <a class="button" href="">Rubric</a>
         <a class="button" href="deadline">Deadline</a>
@@ -262,12 +261,14 @@ function checklogout(){
 </script>
 
 </center>
-<a href="#"><i class="far fa-id-card"></i></a>
-<a href="#"><i class="fas fa-phone"></i></a>
-<a href="#"><i class="fas fa-envelope-open-text"></i></a>
+<a href="#"><i class="far fa-id-card"><span>&emsp;&emsp;{{ Auth::user()->name }}</span></i></a>
+<a href="#"><i class="fas fa-phone"><span>&emsp;&emsp;{{ Auth::user()->phonenum }}</span></i></a>
+<a href="#"><i class="fas fa-envelope-open-text"><span>&emsp;&emsp;{{ Auth::user()->email }}</span></i></a>
 <div style="background-color:#000000; height:3px;"></div>
-  <a href="#"><i class="fas fa-folder-open"></i></a>
-  <a href="#" onclick="return checklogout()"><i  class="fas fa-door-open"></i><span>Logout</span></a>
+  <form method="POST" action="/logout">
+  @csrf
+  <a href="/logout"><i  class="fas fa-door-open"></i>&emsp;<span>Logout</span></a>
+</form>
 </div>
 
 <div class="content">

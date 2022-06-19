@@ -1,15 +1,16 @@
-@extends ('masterC')
+@extends ('masterS')
 @section('content')
 
 <!DOCTYPE html>
     <html>
         <style>
 
-table {
+table{
 border:no border;
 text-align:left;
 font-size:15px;
-height:25px;
+margin-left:160px;
+margin-right:150px;
 }
 .round {
   border-radius: 50%;
@@ -37,6 +38,7 @@ height:25px;
     margin-left:90%;
 }
 
+
 </style>
 @if(session()->has('successMsg'))
     <div class="alert alert-success">
@@ -45,15 +47,14 @@ height:25px;
 @endif
 <h3 style="color:orange;font-size:39px;text-align:center;margin-top:-6%;">Supervisor's Profile</h3>
 <br><br><br>
-@foreach($result as $detaa)
-<form action="/searchsvlist"  method='get'>
+<form action="/svmyprofile"  method='get'>
     @csrf
-    <table>
+<table>
 <tr>
 <th style = "font-size:30px;border:2px;color:orange;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &emsp;Biography</th>
 </tr>
 <tr>
-<th>&emsp;&emsp;<input style = "border:2px solid black;border-radius:5px;width:500px;height:100px;margin-left:60%;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{ $detaa->svbiography }}" required><br><br></th>
+<th>&emsp;&emsp;<input style = "border:2px solid black;border-radius:5px;width:500px;height:100px;margin-left:60%;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{ $deta->svbiography }}" required><br><br></th>
 </tr>
 <br>
 <tr>
@@ -61,29 +62,29 @@ height:25px;
 </tr>
 <tr>
 <th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;SupervisorID: <br><br></th>
-<th><input style = "border:2px solid black;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{ $detaa->supervisorID }}" required><br><br></th>
+<th><input style = "border:2px solid black;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{ $deta->supervisorID }}" required><br><br></th>
 </tr>
 <tr>
 <th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Name: <br><br></th>
-<th><input style = "border:2px solid black;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{ $detaa->svname }}" required><br><br></th>
+<th><input style = "border:2px solid black;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{ $deta->svname }}" required><br><br></th>
 </tr>
 <tr>
 <th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Phone Number:<br><br></th>
-<th><input style = "border:2px solid black;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{ $detaa->svphonenum }}" required><br><br></th>
+<th><input style = "border:2px solid black;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{ $deta->svphonenum }}" required><br><br></th>
 </tr>
 <tr>
 <th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Email:<br><br></th>
-<th><input style = "border:2px solid black;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{ $detaa->svemail }}" required><br><br></th>
+<th><input style = "border:2px solid black;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{ $deta->svemail }}" required><br><br></th>
 </tr>
 <tr>
 <th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Expertise:<br><br></th>
-<th><input style = "border:2px solid black;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{ $detaa->svexpertise }}" required><br><br></th>
+<th><input style = "border:2px solid black;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{ $deta->svexpertise }}" required><br><br></th>
 </tr>
-@endforeach
+
+
+
 </table>
 </form>
-<button onclick="location.href='{{ url('/searchsvlist') }}'" type="submit" class="b b1" value="DeBack" style="width:80px;height:30px;margin-left:80%;">BACK</button>
-<br><br>
 </html>
 
 

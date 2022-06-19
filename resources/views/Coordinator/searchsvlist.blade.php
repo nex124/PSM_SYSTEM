@@ -78,6 +78,11 @@ table th,td{
   <th>Delete</th>
   </tr>
 </thead>
+@if(session()->has('successMsg'))
+    <div class="alert alert-success">
+        {{ session()->get('successMsg') }}
+    </div>
+@endif
 <tbody>
 @foreach($deta as $detaa)
   <tr>
@@ -86,7 +91,7 @@ table th,td{
 	<td>{{$detaa->svphonenum}}</td>
     <td>{{$detaa->svemail}}</td>
     <td><a href="/viewsvprofile/{{ $detaa->supervisorID }}"><button type="button" style="background-color: white; border: 1px solid white;" > <i class="fas fa-eye"></i> </button></a></td>
-    <td><a href="/searchsvlist/{{ $detaa->supervisorID }}"><button type="button" style="background-color: white; border: 1px solid white;" > <i class="fas fa-trash"></i> </button></a></td>
+    <td><a href="/searchsvlist/{{ $detaa->supervisorID }}"><button onclick="return confirm('Are you sure? This record and it`s details will be permanantly deleted!')" type="button" style="background-color: white; border: 1px solid white;" > <i class="fas fa-trash"></i> </button></a></td>
   </tr>
   @endforeach
 </tbody>

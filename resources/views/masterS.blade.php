@@ -6,11 +6,30 @@
 <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <style>
+  .parent {
+  margin: 1rem;
+  padding: 2rem 2rem;
+  text-align: center;
+}
+.child {
+  height: 300px;
+  width: 40%;
+  display: inline-block;
+  padding: 1rem 1rem;
+  vertical-align: middle;
+}
+.vertical {
+  height: 400px;
+  width: 0.5px;
+  display: inline-block;
+  border: 1px solid gray;
+  vertical-align: middle;
+}
 
 body{
 margin:0;
@@ -244,8 +263,7 @@ font-size: 18px;
     <h3>University   Malaysia <span> Pahang</span></h3>
 </div>
     <!--right-->
-    <div class="topnav">
-    <a class="button" href="/">Logout</a>  
+    <div class="topnav"> 
         <a class="button" href="/studentListS">Report</a>
         <a class="button" href="">Rubric</a>
         <a class="button" href="{{ url('svMenu') }}">Evaluation</a>   
@@ -266,20 +284,21 @@ function checklogout(){
 
 </center>
 
-<a href=""><i class="far fa-id-card"></i></a>
-<a href=""><i class="fas fa-phone"></i></a>
-<a href=""><i class="fas fa-envelope-open-text"></i></a>
+<a href=""><i class="far fa-id-card"><span>&emsp;&emsp;{{ Auth::user()->name }}</span></i></a>
+<a href=""><i class="fas fa-phone"><span>&emsp;&emsp;{{ Auth::user()->phonenum }}</span></i></a>
+<a href=""><i class="fas fa-envelope-open-text"><span>&emsp;&emsp;{{ Auth::user()->email }}</span></i></a>
 <div style="background-color:#000000; height:3px;"></div>
-  <a href="/Student/editprofile"><i class="fas fa-folder-open"></i></a>
-  <a href="#" onclick="return checklogout()"><i  class="fas fa-door-open"></i><span>Logout</span></a>
-
+  <a href="/svmyprofile"><i class="fas fa-folder-open"><span>&emsp;&emsp;My profile</span></i></a>
+  <form method="POST" action="/logout">
+  @csrf
+  <a href="/logout"><i  class="fas fa-door-open"></i>&emsp;<span>Logout</span></a>
+</form>
 </div>
 
 <div class="content">
 <br><br><br>
 <img src = " {{ URL('/umplogo.png') }} " alt="ump" width="200" height="100">
 <br><br><br>
-@yield('main')
 @yield('table')
 @yield('form')
 @yield('content')

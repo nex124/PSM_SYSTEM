@@ -36,12 +36,17 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         if (auth()->user()->role == 'student') {
-            return redirect('/masterStu');
-        } else if (auth()->user()->role == 'supervisor') { 
-            return redirect('/masterS');
+
+                return redirect('/myprofile');
+
+            }else if (auth()->user()->role == 'supervisor') { 
+
+            return redirect('/svmyprofile');
+            
         }else{
-            return redirect('/masterC');
-        }
+
+                return redirect('/searchpsmtitle');
+            }
     }
 
     /**

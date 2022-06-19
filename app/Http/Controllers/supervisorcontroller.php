@@ -35,4 +35,10 @@ class supervisorcontroller extends Controller
         $result = Student::select('*')->where('studentID', '=', $studentID)->get();
         return view('\supervisor\viewstudentprofile', ['result' => $result]);
     }
+
+    function svmyprofile()
+    {
+        $deta = supervisor::select('*')->where('svName','=',auth()->user()->name)->first();
+        return view('\supervisor\svmyprofile',['deta'=>$deta]);
+    }
 }

@@ -9,8 +9,8 @@ use App\Models\Deadline;
 use App\Http\Controllers\usercontroller;
 use App\Http\Controllers\supervisorcontroller;
 use App\Http\Controllers\studentcontroller;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Top20;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,7 +24,8 @@ use App\Http\Controllers\Top20;
 
 //Main
 
-
+Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+                ->name('logout');
 
 Route::get('/masterS', function () {
 
@@ -50,28 +51,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::get('/logout', [usercontroller::class, 'destroy'])
+                ->name('logout');
 
 //Manage Evaluation
-Route::get('/svMenu', function () {
-
-    $deadlinePsm1 = Deadline::select(['deadlines.*'])
-                            ->where('psmType', '=', 'PSM 1')
-                            ->latest('created_at')->first();
-
-    $deadlinePsm2 = Deadline::select(['deadlines.*'])
-                            ->where('psmType', '=', 'PSM 2')
-                            ->latest('created_at')->first();
-
-    $deadlinePta = Deadline::select(['deadlines.*'])
-                            ->where('psmType', '=', 'PTA')
-                            ->latest('created_at')->first();
-
-    return view('/evaluation/svMenu', [
-        'deadlinePsm1' => $deadlinePsm1,
-        'deadlinePsm2' => $deadlinePsm2,
-        'deadlinePta' => $deadlinePta,
-    ]);
-});
+Route::get('/svMenu', [EvaluationController::class, 'svMenu']);
 
 Route::get('/svView', [EvaluationController::class, 'svView']);
 Route::get('/deadline', [EvaluationController::class, 'deadline']);
@@ -143,11 +127,13 @@ Route::get('/searcsupervisor', function () {
     return view('/Student/searchsupervisor');
 });
 
-Route::get('/editprofile', 'App\Http\Controllers\usercontroller@home');
 Route::get('/searchsupervisor', 'App\Http\Controllers\studentcontroller@svlist');
 Route::get('/searchsupervisor/search', 'App\Http\Controllers\studentcontroller@searchsupervisor');
 Route::get('/svprofile/{supervisorID}', 'App\Http\Controllers\studentcontroller@svprofile');
-
+Route::get('/myprofile', function () {
+    return view('/Student/myprofile');
+});
+Route::get('/myprofile', 'App\Http\Controllers\studentcontroller@mylist');
 
 
 //Manage Coordinator
@@ -202,3 +188,7 @@ Route::get('/smainpage', function () {
 Route::get('/searchstudentlist', 'App\Http\Controllers\supervisorcontroller@studentlist');
 Route::get('/searchstudentlist/search', 'App\Http\Controllers\supervisorcontroller@studentprofile');
 Route::get('/viewstudentprofile/{studentID}', 'App\Http\Controllers\supervisorcontroller@viewprofile');
+Route::get('/svmyprofile', function () {
+    return view('/supervisor/svmyprofile');
+});
+Route::get('/svmyprofile', 'App\Http\Controllers\supervisorcontroller@svmyprofile');

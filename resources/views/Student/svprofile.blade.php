@@ -8,7 +8,7 @@
 table {
 border:no border;
 text-align:left;
-font-size:18px;
+font-size:15px;
 height:25px;
 }
 .round {
@@ -17,7 +17,7 @@ height:25px;
 
 .b{
   width:100px;
-  margin-left:20px;
+  margin-right:10%;
   border-radius:8px;
 }
 
@@ -33,9 +33,6 @@ height:25px;
   color: white;
 }
 
-.bio{
-    margin-left:90%;
-}
 
 </style>
 @if(session()->has('successMsg'))
@@ -44,60 +41,46 @@ height:25px;
     </div>
 @endif
 <h3 style="color:orange;font-size:39px;text-align:center;margin-top:-6%;">Supervisor's Profile</h3>
-<br><br><br><br><br><br>
+<br><br><br>
 @foreach($result as $detaa)
 <form action="/searchsupervisor"  method='get'>
     @csrf
 <table>
-    <tr>
-        <th><img src="" style="height=150";width="150";></th>
+<tr>
+<th style = "font-size:30px;border:2px;color:orange;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &emsp;Biography</th>
 </tr>
 <tr>
-<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Biography</th>
-</tr>
-<tr>
-<th class="bio">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ $detaa->svbiography }}<br><br></th>
+<th>&emsp;&emsp;<input style = "border:2px solid black;border-radius:5px;width:500px;height:100px;margin-left:60%;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{ $detaa->svbiography }}" required><br><br></th>
 </tr>
 <br>
 <tr>
-<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Info<br><br></th>
+<th colspan="2" style = "font-size:30px;border:2px;color:orange;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Info<br><br></th>
 </tr>
 <tr>
-<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; *SupervisorID: <br><br></th>
-<th>&emsp;&emsp;{{ $detaa->supervisorID }}<br><br></th>
+<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;SupervisorID: <br><br></th>
+<th><input style = "border:2px solid black;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{ $detaa->supervisorID }}" required><br><br></th>
 </tr>
 <tr>
-<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; *Name: <br><br></th>
-<th>&emsp;&emsp;{{ $detaa->svname }}<br><br></th>
+<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Name: <br><br></th>
+<th><input style = "border:2px solid black;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{ $detaa->svname }}" required><br><br></th>
 </tr>
 <tr>
-<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; *Phone Number:<br><br></th>
-<th>&emsp;&emsp;{{ $detaa->svphonenum }}<br><br></th>
+<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Phone Number:<br><br></th>
+<th><input style = "border:2px solid black;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{ $detaa->svphonenum }}" required><br><br></th>
 </tr>
 <tr>
-<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; *Email:<br><br></th>
-<th>&emsp;&emsp;{{ $detaa->svemail }}<br><br></th>
+<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Email:<br><br></th>
+<th><input style = "border:2px solid black;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{ $detaa->svemail }}" required><br><br></th>
 </tr>
 <tr>
-<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*Expertise:<br><br></th>
-<th>&emsp;&emsp;{{ $detaa->svexpertise }}<br><br></th>
-</tr>
-<tr>
-<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; *Password:<br><br></th>
-<th>&emsp;&emsp;{{ $detaa->svpassword }}<br><br></th>
-</tr>
-<tr>
-<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; *Role Type:<br><br></th>
-<th>&emsp;&emsp;{{ $detaa->role_type }}<br><br></th>
-</tr>
-<tr>
-<th style="text-colour:red;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; *Required Field</th>
+<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Expertise:<br><br></th>
+<th><input style = "border:2px solid black;border-radius:5px;"type="text" readonly name = "name"  size="20" placeholder="Student's Name" value="{{ $detaa->svexpertise }}" required><br><br></th>
 </tr>
 @endforeach
 
 </table>
 <br><br>
-<button onclick="location.href='{{ url('/searchsupervisor') }}'" type="submit" class="b b1" value="DeBack" style="width:80px;height: 40px;margin-right:1%;">BACK</button>
+<button onclick="location.href='{{ url('/searchsupervisor') }}'" type="submit" class="b b1" value="Back" style="width:60px;height: 30px;margin-left:80%;">BACK</button>
 <br><br>
 </form>
 </html>

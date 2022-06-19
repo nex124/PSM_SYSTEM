@@ -41,7 +41,7 @@ margin-left:200px;
 <h3 style="color:orange;font-size:39px;text-align:center;margin-top:-6%;">Student's Profile</h3>
 <br><br><br><br><br><br>
 @foreach($result as $detaa)
-<form action="{{ url(updatestudent/'.$detaa->studentID.'/update) }}" method='post'>
+<form action="/updatestudent/{{$detaa->studentID}}/update" method='post'>
     @csrf
 <table>
     <tr>
@@ -77,32 +77,22 @@ margin-left:200px;
 </tr>
 <tr>
 <th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Supervisor:</th>
-<th>&emsp;&emsp;<input type="text" name = "name"  size="40" placeholder="Student's Name" value="{{$detaa->stdsupervisor}}"required><br><br></th>
+<th>&emsp;&emsp;<input type="text" name = "name"  size="40" placeholder="Superviaor's Name" value="{{$detaa->stdsupervisor}}"required><br><br></th>
 </tr>
 <tr>
 <th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;PSM title:</th>
-<th>&emsp;&emsp;<input type="text" name = "name"  size="40" placeholder="Student's Name" value="{{$detaa->stdpsmtitle}}"required><br><br></th>
+<th>&emsp;&emsp;<input type="text" name = "name"  size="40" placeholder="PSM title" value="{{$detaa->stdpsmtitle}}"required><br><br></th>
 </tr>
 <tr>
 <th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;PSM Type:<br><br></th>
 <th>{{$detaa->psmType}}</th>
 </tr>
-<tr>
-<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Password:</th>
-<th>&emsp;&emsp;<input type="text" name = "name"  size="40" placeholder="Student's Name" value="{{$detaa->password}}"required><br><br></th>
-</tr>
-<tr>
-<th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Role Type:<br><br></th>
-<th>&emsp;&emsp;{{$detaa->roletype}}</th>
-</tr>
 @endforeach
-
-
 </table>
 <br><br>
 <input type="submit" class="b b1" value="Update" style="width:100px;margin-left:1000px;">
-<br><br>
 </form>
+<br><br>
 </html>
 
 

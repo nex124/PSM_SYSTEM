@@ -9,4 +9,10 @@ class Student extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    protected $primaryKey = 'studentID';
+
+    public $incrementing = false;
+    protected $keyType = 'string';
+
+    protected $fillable = array('studentName', 'stdaddress', 'studentPhone','stdemail','stdyear','stdsupervisor','stdpsmtitle');
 }
