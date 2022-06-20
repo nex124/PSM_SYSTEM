@@ -63,6 +63,7 @@
                     <option value="student">student</option>
                     <option value="supervisor">supervisor</option>
                     <option value="coordiantor">coordiantor</option>
+                    <option value="coordiantor">Evaluator</option>
                     </select>
 
             </div>

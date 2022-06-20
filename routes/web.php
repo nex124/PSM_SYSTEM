@@ -24,9 +24,15 @@ use App\Http\Controllers\CarnivalController;
 Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 
-Route::get('/masterS', function () {
+Route::get('/', function () {
 
-    return view('masterS');
+    return view('mainpage.redirect');
+});
+
+
+Route::get('/masterZ', function () {
+
+    return view('masterZ');
 });
 
 Route::get('/masterStu', function () {
@@ -37,7 +43,7 @@ Route::get('/masterC', function () {
     return view('masterC');
 });
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('home');
 });
 /*Route::get('/', function () {

@@ -40,7 +40,8 @@
                     <select id="role" name="role" required>
                     <option value="student">student</option>
                     <option value="supervisor">supervisor</option>
-                    <option value="coordiantor">coordiantor</option>
+                    <option value="coordiantor">coordiantor</opti
+                    <option value="student">Evaluator</option>
                     </select>
 
 

@@ -285,9 +285,31 @@
         <img src=" {{ URL('umplogo.png') }} " alt="ump" width="200" height="100">
         <br><br><br>
 
-        @yield('table')
-        @yield('form')
-        @yield('menu')
+<script>
+function checklogout(){
+  return confirm('Are you sure to Logout?');
+}
+</script>
+
+</center>
+<a href="#"><i class="far fa-id-card"><span>&emsp;&emsp;{{ Auth::user()->name }}</span></i></a>
+<a href="#"><i class="fas fa-phone"><span>&emsp;&emsp;{{ Auth::user()->phonenum }}</span></i></a>
+<a href="#"><i class="fas fa-envelope-open-text"><span>&emsp;&emsp;{{ Auth::user()->email }}</span></i></a>
+<div style="background-color:#000000; height:3px;"></div>
+  <form method="POST" action="/logout">
+  @csrf
+  <a href="/logout"><i  class="fas fa-door-open"></i>&emsp;<span>Logout</span></a>
+</form>
+</div>
+
+<div class="content">
+<br><br><br>
+<img src = " {{ URL('umplogo.png') }} " alt="ump" width="200" height="100">
+<br><br><br>
+@yield('content')
+@yield('table')
+@yield('form')
+@yield('menu')
 
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
